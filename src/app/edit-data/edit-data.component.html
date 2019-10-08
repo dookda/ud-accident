@@ -1,0 +1,214 @@
+<div class="container cmain">
+    <form [formGroup]="accForm" novalidate>
+        <div class="login-form">
+            <!-- <div class="col-12"> -->
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+
+                        <label class="login-field-icon fui-new" for="first_name">ชื่อ</label>
+                        <input type="text" class="form-control" placeholder="first_name" id="first_name"
+                            formControlName="first_name" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="login-field-icon fui-user" for="last_name">นามสกุล</label>
+                        <input type="text" class="form-control" placeholder="last_name" id="last_name"
+                            formControlName="last_name" />
+                    </div>
+                </div>
+            </div>
+            <!-- </div> -->
+
+
+            <div class="form-group">
+                <label class="login-field-icon fui-user" for="id_card">เลขบัตรประจำตัวประชาชน</label>
+                <input type="number" class="form-control" placeholder="id_card" id="id_card"
+                    formControlName="id_card" />
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="login-field-icon fui-user" for="age">อายุ</label>
+                        <input type="number" class="form-control" placeholder="age" id="age" formControlName="age" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group"><label class="login-field-icon fui-user" for="sex">เพศ</label>
+                        <select class="form-control" formControlName="sex">
+                            <option value="" disabled>เพศ</option>
+                            <option value="ชาย">ชาย</option>
+                            <option value="หญิง">หญิง</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="login-field-icon fui-user" for="acc_date">วันที่เกิดเหตุ</label>
+                        <input type="date" class="form-control" placeholder="acc_date" id="acc_date"
+                            formControlName="acc_date" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="login-field-icon fui-user" for="acc_time">เวลาที่เกิดเหตุ</label>
+                        <input type="time" class="form-control" placeholder="acc_time" id="acc_time"
+                            formControlName="acc_time" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="login-field-icon fui-user" for="acc_place">สถานที่เกิดเหตุ</label>
+                <input type="text" class="form-control" placeholder="acc_place" id="acc_place"
+                    formControlName="acc_place" />
+            </div>
+
+            <div class="form-group">
+                ใช้เมาส์ขยับ marker ไปยังสถานที่เกิดเหตุ <br>
+                <div id="map"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label class="login-field-icon fui-user" for="x">พิกัด ละติจูด</label>
+                    <input type="number" class="form-control" id="x" placeholder="{{latlon.lat}}" formControlName="x" />
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label class="login-field-icon fui-user" for="y">พิกัด ลองจิจูด</label>
+                    <input type="number" class="form-control" id="y" placeholder="{{latlon.lon}}" formControlName="y" />
+                </div>
+            </div>
+
+            <hr>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <!-- <input type="text" class="form-control" placeholder="vehicle" id="vehicle" formControlName="vehicle" /> -->
+                        <label class="login-field-icon fui-user" for="vehicle">ยานพาหนะ</label>
+                        <select class="form-control" formControlName="vehicle">
+                            <option value="" disabled>ยานพาหนะ</option>
+                            <option value="จักรยานยนต์">จักรยานยนต์</option>
+                            <option value="รถจักรยาน">รถจักรยาน</option>
+                            <option value="รถยนต์">รถยนต์</option>
+                            <option value="รถโดยสาร">รถโดยสาร</option>
+                            <option value="รถบรรทุก">รถปิคอัพ</option>
+                            <option value="รถบรรทุก">รถบรรทุก</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="login-field-icon fui-user" for="injury_type">ประเภทผู้บาดเจ็บ</label>
+                        <select class="form-control" formControlName="injury_type">
+                            <option value="" disabled>ประเภทผู้บาดเจ็บ</option>
+                            <option value="ขับขี่">ขับขี่</option>
+                            <option value="โดยสาร">โดยสาร</option>
+                            <option value="เดินเท้า">เดินเท้า</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="login-field-icon fui-user" for="alcohol">แอลกอฮอล์</label>
+                        <select class="form-control" formControlName="alcohol">
+                            <option value="" disabled>แอลกอฮอล์</option>
+                            <option value="ดื่มแอลกอฮอล์">ดื่มแอลกอฮอล์</option>
+                            <option value="ไม่ดื่มแอลกอฮอล์">ไม่ดื่มแอลกอฮอล์</option>
+                            <option value="ไม่ทราบ">ไม่ทราบ</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="login-field-icon fui-user" for="behaviour">พฤติกรรมเสี่ยง</label>
+                        <select class="form-control" formControlName="behaviour">
+                            <option value="" disabled>พฤติกรรมเสี่ยง</option>
+                            <option value="ไม่สวมหมวกนิรภัย">ไม่สวมหมวกนิรภัย</option>
+                            <option value="ไม่คาดเข็มขัดนิรภัย">ไม่คาดเข็มขัดนิรภัย</option>
+                            <option value="ขับรถเร็ว">ขับรถเร็ว</option>
+                            <option value="รถดัดแปลง">รถดัดแปลง</option>
+                            <option value="กลับรถ">กลับรถ</option>
+                            <option value="ไฟท้ายไม่ชัดเจน">ไฟท้ายไม่ชัดเจน</option>
+                            <option value="บรรทุกหนัก">บรรทุกหนัก</option>
+                            <option value="ขับย้อนศร">ขับย้อนศร</option>
+                            <option value="มีงานก่อสร้างทาง">มีงานก่อสร้างทาง</option>
+                            <option value="ขับรถตัดหน้า">ขับรถตัดหน้า</option>
+                            <option value="ไม่ทราบ">ไม่ทราบ</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="login-field-icon fui-user" for="to_hospital">ส่งต่อ รพ</label>
+                <input type="text" class="form-control" placeholder="to_hospital" id="to_hospital"
+                    formControlName="to_hospital" />
+            </div>
+
+            <div class="form-group">
+                <label class="login-field-icon fui-user" for="death_info">ข้อมูลเสียชีวิต (ภายใน30
+                    วันจากเกิดเหตุ)</label>
+                <select class="form-control" formControlName="death_info">
+                    <option value="" disabled>ข้อมูลเสียชีวิต</option>
+                    <option value="ที่เกิดเหตุ">ที่เกิดเหตุ</option>
+                    <option value="ER">ER</option>
+                    <option value="ผู้ป่วยใน">ผู้ป่วยใน</option>
+                    <option value="ระหว่างส่งต่อ ณ จุดเกิดเหตุ-รพ.">ระหว่างส่งต่อ ณ จุดเกิดเหตุ-รพ.</option>
+                    <option value="ระหว่างส่งต่อ รพช.-รพศ.">ระหว่างส่งต่อ รพช.-รพศ.</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="login-field-icon fui-user" for="transfer_type">หน่วยที่นำส่ง</label>
+                <select class="form-control" formControlName="transfer_type">
+                    <option value="" disabled>หน่วยที่นำส่ง</option>
+                    <option value="ประชาชน/มาเอง">ประชาชน/มาเอง</option>
+                    <option value="EMS 8 นาที">EMS 8 นาที</option>
+                    <option value="EMS 10 นาที">EMS 10 นาที</option>
+                    <option value="EMS เกิน 10 นาที">EMS เกิน 10 นาที</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="login-field-icon fui-user" for="transfer_by">นำส่งโดย</label>
+                <input type="text" class="form-control" placeholder="transfer_by" id="transfer_by"
+                    formControlName="transfer_by" />
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="login-field-icon fui-user" for="death_date">วันที่เสียชีวิต</label>
+                        <input type="date" class="form-control" placeholder="death_date" id="death_date"
+                            formControlName="death_date" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="login-field-icon fui-user" for="death_time">เวลาเสียชีวิต</label>
+                        <input type="time" class="form-control" placeholder="death_time" id="death_time"
+                            formControlName="death_time" />
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary btn-lg btn-block" type="submit"
+                [disabled]="accForm.pristine || accForm.invalid" class="btn btn-success" (click)="onSubmit()">
+                Save
+            </button>
+            &nbsp;
+            <button class="btn btn-primary btn-lg btn-block" type="submit" class="btn btn-info" (click)="gotoReport()">
+                กลับหน้ารายงาน
+            </button>
+        </div>
+    </form>
+</div>
