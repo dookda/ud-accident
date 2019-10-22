@@ -33,14 +33,18 @@ export class EditDataComponent implements OnInit {
     // console.log(date);
 
     this.accForm = this.fb.group({
+      title_name: [this.selData.title_name, Validators.required],
       first_name: [this.selData.first_name, Validators.required],
       last_name: [this.selData.last_name, Validators.nullValidator],
+      type: [this.selData.type, Validators.nullValidator],
       id_card: [this.selData.id_card, Validators.nullValidator],
       age: [this.selData.age, Validators.nullValidator],
       sex: [this.selData.sex, Validators.nullValidator],
       acc_date: [formatDate(this.selData.acc_date, 'yyyy-MM-dd', 'en'), Validators.nullValidator],
       acc_time: [this.selData.acc_time, Validators.nullValidator],
       acc_place: [this.selData.acc_place, Validators.nullValidator],
+      amp: [this.selData.amp, Validators.nullValidator],
+      tam: [this.selData.tam, Validators.nullValidator],
       x: [this.selData.x, Validators.nullValidator],
       y: [this.selData.y, Validators.nullValidator],
       vehicle: [this.selData.vehicle, Validators.nullValidator],
@@ -50,7 +54,7 @@ export class EditDataComponent implements OnInit {
       to_hospital: [this.selData.to_hospital, Validators.nullValidator],
       death_info: [this.selData.death_info, Validators.nullValidator],
       transfer_type: [this.selData.transfer_type, Validators.nullValidator],
-      transfer_by: [this.selData.transfer_by, Validators.nullValidator],
+      disputant: [this.selData.disputant, Validators.nullValidator],
       death_date: [formatDate(this.selData.death_date, 'yyyy-MM-dd', 'en'), Validators.nullValidator],
       death_time: [this.selData.death_time, Validators.nullValidator],
       geom: [this.selData.geom, Validators.nullValidator],
@@ -127,18 +131,36 @@ export class EditDataComponent implements OnInit {
   async getLocation() {
     this.latlon = { lat: this.selData.x, lon: this.selData.y };
 
-    if (this.marker) {
-      this.map.removeLayer(this.marker);
-    }
-
     this.marker = L.marker([this.latlon.lat, this.latlon.lon], {
       draggable: 'true'
     }).bindPopup('ตำแหน่งเกิดอุบัติเหตุ').addTo(this.map);
 
-
     this.marker.on('dragend', (e: any) => {
       this.latlon = { lat: e.target._latlng.lat, lon: e.target._latlng.lng };
     });
+  }
+
+  xChange(e: any) {
+    if (this.marker) {
+      this.map.removeLayer(this.marker);
+    }
+    // console.log(e.target.value);
+    this.latlon.lat = e.target.value;
+    this.marker = L.marker([this.latlon.lat, this.latlon.lon], {
+      draggable: 'true'
+    }).bindPopup('ตำแหน่งเกิดอุบัติเหตุ').addTo(this.map);
+  }
+
+  yChange(e: any) {
+    if (this.marker) {
+      this.map.removeLayer(this.marker);
+    }
+    // console.log(e.target.value);
+    this.latlon.lon = e.target.value;
+
+    this.marker = L.marker([this.latlon.lat, this.latlon.lon], {
+      draggable: 'true'
+    }).bindPopup('ตำแหน่งเกิดอุบัติเหตุ').addTo(this.map);
   }
 
   async onSubmit() {
@@ -148,9 +170,7 @@ export class EditDataComponent implements OnInit {
     this.formData.y = this.latlon.lon;
     this.formData.geom = (JSON.stringify(this.marker.toGeoJSON().geometry));
 
-
     console.log(this.formData);
-
     await this.service.updateData(this.formData).then((res: any) => {
       if (res) {
         this.accForm.reset();

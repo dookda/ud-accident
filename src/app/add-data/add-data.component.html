@@ -4,7 +4,22 @@
         <div class="login-form">
             <!-- <div class="col-12"> -->
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-2">
+                    <div class="form-group"><label class="login-field-icon fui-user" for="sex">คำนำหน้า</label>
+                        <select class="form-control" formControlName="title_name">
+                            <option value="" disabled>คำนำหน้า</option>
+                            <option value="นาย">นาย</option>
+                            <option value="นาง">นาง</option>
+                            <option value="น.ส.">น.ส.</option>
+                            <option value="ด.ช.">ด.ช.</option>
+                            <option value="ด.ญ.">ด.ญ.</option>
+                            <option value="Mr.">Mr.</option>
+                            <option value="Mrs.">Mrs.</option>
+                            <option value="Ms.">Ms.</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-5">
                     <div class="form-group">
 
                         <label class="login-field-icon fui-new" for="first_name">ชื่อ</label>
@@ -12,7 +27,7 @@
                             formControlName="first_name" />
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-5">
                     <div class="form-group">
                         <label class="login-field-icon fui-user" for="last_name">นามสกุล</label>
                         <input type="text" class="form-control" placeholder="last_name" id="last_name"
@@ -22,11 +37,20 @@
             </div>
             <!-- </div> -->
 
-
-            <div class="form-group">
-                <label class="login-field-icon fui-user" for="id_card">เลขบัตรประจำตัวประชาชน</label>
-                <input type="number" class="form-control" placeholder="id_card" id="id_card"
-                    formControlName="id_card" />
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="login-field-icon fui-user" for="type">บาดเจ็บ/เสียชีวิต</label>
+                    <select class="form-control" formControlName="type">
+                        <option value="" disabled>บาดเจ็บ/เสียชีวิต</option>
+                        <option value="บาดเจ็บ">บาดเจ็บ</option>
+                        <option value="เสียชีวิต">เสียชีวิต</option>
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <label class="login-field-icon fui-user" for="id_card">เลขบัตรประจำตัวประชาชน</label>
+                    <input type="number" class="form-control" placeholder="id_card" id="id_card"
+                        formControlName="id_card" />
+                </div>
             </div>
 
             <div class="row">
@@ -65,7 +89,7 @@
             </div>
 
             <div class="form-group">
-                <label class="login-field-icon fui-user" for="acc_place">สถานที่เกิดเหตุ</label>
+                <label class="login-field-icon fui-user" for="acc_place">ที่อยู่ผู้บาดเจ็บ-เสียชีวิต</label>
                 <input type="text" class="form-control" placeholder="acc_place" id="acc_place"
                     formControlName="acc_place" />
             </div>
@@ -74,17 +98,17 @@
 
                 <div class="col-sm-6">
                     <div class="form-group">อำเภอ
-                        <select class="form-control" (change)="selectTam($event)" formControlName="amp">
+                        <select class="form-control" (change)="selectTam()" [(ngModel)]="ampSel" formControlName="amp">
                             <option value="" disabled>อำเภอ</option>
-                            <option *ngFor="let a of amp" [value]="a">{{a.amp_name}}</option>
+                            <option *ngFor="let a of amp" [ngValue]="a">{{a.amp_name}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">ตำบล
-                        <select class="form-control" (change)="fitTam($event)" formControlName="tam">
+                        <select class="form-control" (change)="fitTam()" [(ngModel)]="tamSel" formControlName="tam">
                             <option value="" disabled>ตำบล</option>
-                            <option *ngFor="let t of tam" [value]="t">{{t.tam_name}}</option>
+                            <option *ngFor="let t of tam" [ngValue]="t">{{t.tam_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -98,11 +122,13 @@
             <div class="row">
                 <div class="col-sm-6 form-group">
                     <label class="login-field-icon fui-user" for="x">พิกัด ละติจูด</label>
-                    <input type="number" class="form-control" id="x" placeholder="{{latlon.lat}}" formControlName="x" />
+                    <input type="number" class="form-control" id="x" value="{{latlon.lat}}" formControlName="x"
+                        (change)="xChange($event)" />
                 </div>
                 <div class="col-sm-6 form-group">
                     <label class="login-field-icon fui-user" for="y">พิกัด ลองจิจูด</label>
-                    <input type="number" class="form-control" id="y" placeholder="{{latlon.lon}}" formControlName="y" />
+                    <input type="number" class="form-control" id="y" value="{{latlon.lon}}" formControlName="y"
+                        (change)="yChange($event)" />
                 </div>
             </div>
 
@@ -111,18 +137,44 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <!-- <input type="text" class="form-control" placeholder="vehicle" id="vehicle" formControlName="vehicle" /> -->
-                        <label class="login-field-icon fui-user" for="vehicle">ยานพาหนะ</label>
+                        <label class="login-field-icon fui-user" for="vehicle">ยานพาหนะคนเจ็บ/ผู้เสียชีวิต</label>
                         <select class="form-control" formControlName="vehicle">
                             <option value="" disabled>ยานพาหนะ</option>
-                            <option value="จักรยานยนต์">จักรยานยนต์</option>
+                            <option value="รถจักรยานยนต์">รถจักรยานยนต์</option>
                             <option value="รถจักรยาน">รถจักรยาน</option>
-                            <option value="รถยนต์">รถยนต์</option>
+                            <option value="รถยนต์">รถเก๋ง</option>
                             <option value="รถโดยสาร">รถโดยสาร</option>
-                            <option value="รถบรรทุก">รถปิคอัพ</option>
+                            <option value="รถปิคอัพ">รถปิคอัพ</option>
                             <option value="รถบรรทุก">รถบรรทุก</option>
+                            <option value="รถไฟ">รถไฟ</option>
+                            <option value="รถตู้">รถตู้</option>
+                            <option value="รถลากเข็น">รถลากเข็น</option>
+                            <option value="อื่นๆ">อื่นๆ</option>
                         </select>
                     </div>
                 </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="login-field-icon fui-user" for="transfer_by">ยานพาหนะคู่กรณี</label>
+                        <select class="form-control" formControlName="disputant">
+                            <option value="" disabled>ยานพาหนะ</option>
+                            <option value="รถจักรยานยนต์">รถจักรยานยนต์</option>
+                            <option value="รถจักรยาน">รถจักรยาน</option>
+                            <option value="รถยนต์">รถเก๋ง</option>
+                            <option value="รถโดยสาร">รถโดยสาร</option>
+                            <option value="รถปิคอัพ">รถปิคอัพ</option>
+                            <option value="รถบรรทุก">รถบรรทุก</option>
+                            <option value="รถไฟ">รถไฟ</option>
+                            <option value="รถตู้">รถตู้</option>
+                            <option value="รถลากเข็น">รถลากเข็น</option>
+                            <option value="อื่นๆ">อื่นๆ</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label class="login-field-icon fui-user" for="injury_type">ประเภทผู้บาดเจ็บ</label>
@@ -131,11 +183,10 @@
                             <option value="ขับขี่">ขับขี่</option>
                             <option value="โดยสาร">โดยสาร</option>
                             <option value="เดินเท้า">เดินเท้า</option>
+                            <option value="อื่นๆ">อื่นๆ</option>
                         </select>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label class="login-field-icon fui-user" for="alcohol">แอลกอฮอล์</label>
@@ -147,6 +198,9 @@
                         </select>
                     </div>
                 </div>
+            </div>
+
+            <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label class="login-field-icon fui-user" for="behaviour">พฤติกรรมเสี่ยง</label>
@@ -166,42 +220,49 @@
                         </select>
                     </div>
                 </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="login-field-icon fui-user" for="death_info">ข้อมูลเสียชีวิต (ภายใน30
+                            วันจากเกิดเหตุ)</label>
+                        <select class="form-control" formControlName="death_info">
+                            <option value="" disabled>ข้อมูลเสียชีวิต</option>
+                            <option value="ที่เกิดเหตุ">ที่เกิดเหตุ</option>
+                            <option value="ER">ER</option>
+                            <option value="ผู้ป่วยใน">ผู้ป่วยใน</option>
+                            <option value="ระหว่างส่งต่อ ณ จุดเกิดเหตุ-รพ.">ระหว่างส่งต่อ ณ จุดเกิดเหตุ-รพ.</option>
+                            <option value="ระหว่างส่งต่อ รพช.-รพศ.">ระหว่างส่งต่อ รพช.-รพศ.</option>
+                            <option value="อื่นๆ">อื่นๆ</option>
+                        </select>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label class="login-field-icon fui-user" for="to_hospital">ส่งต่อ รพ</label>
-                <input type="text" class="form-control" placeholder="to_hospital" id="to_hospital"
-                    formControlName="to_hospital" />
-            </div>
-
-            <div class="form-group">
-                <label class="login-field-icon fui-user" for="death_info">ข้อมูลเสียชีวิต (ภายใน30
-                    วันจากเกิดเหตุ)</label>
-                <select class="form-control" formControlName="death_info">
-                    <option value="" disabled>ข้อมูลเสียชีวิต</option>
-                    <option value="ที่เกิดเหตุ">ที่เกิดเหตุ</option>
-                    <option value="ER">ER</option>
-                    <option value="ผู้ป่วยใน">ผู้ป่วยใน</option>
-                    <option value="ระหว่างส่งต่อ ณ จุดเกิดเหตุ-รพ.">ระหว่างส่งต่อ ณ จุดเกิดเหตุ-รพ.</option>
-                    <option value="ระหว่างส่งต่อ รพช.-รพศ.">ระหว่างส่งต่อ รพช.-รพศ.</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label class="login-field-icon fui-user" for="transfer_type">หน่วยที่นำส่ง</label>
-                <select class="form-control" formControlName="transfer_type">
-                    <option value="" disabled>หน่วยที่นำส่ง</option>
-                    <option value="ประชาชน/มาเอง">ประชาชน/มาเอง</option>
-                    <option value="EMS 8 นาที">EMS 8 นาที</option>
-                    <option value="EMS 10 นาที">EMS 10 นาที</option>
-                    <option value="EMS เกิน 10 นาที">EMS เกิน 10 นาที</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label class="login-field-icon fui-user" for="transfer_by">นำส่งโดย</label>
-                <input type="text" class="form-control" placeholder="transfer_by" id="transfer_by"
-                    formControlName="transfer_by" />
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="login-field-icon fui-user" for="to_hospital">ส่งต่อ รพ</label>
+                        <input type="text" class="form-control" placeholder="to_hospital" id="to_hospital"
+                            formControlName="to_hospital" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="login-field-icon fui-user" for="transfer_type">หน่วยที่นำส่ง</label>
+                        <select class="form-control" formControlName="transfer_type">
+                            <option value="" disabled>หน่วยที่นำส่ง</option>
+                            <option value="ประชาชน/มาเอง">ประชาชน/มาเอง</option>
+                            <option value="EMS 8 นาที">EMS 8 นาที</option>
+                            <option value="EMS 10 นาที">EMS 10 นาที</option>
+                            <option value="EMS เกิน 10 นาที">EMS เกิน 10 นาที</option>
+                            <option value="มูลนิธิอุตรดิตถ์สงเคราะห์">มูลนิธิอุตรดิตถ์สงเคราะห์</option>
+                            <option value="สมาคมกู้ภัยวัดหมอนไม้">สมาคมกู้ภัยวัดหมอนไม้</option>
+                            <option value="กู้ภัยอบต เทศบาล">กู้ภัยอบต เทศบาล</option>
+                            <option value="กู้ภัยลำน้ำน่าน">กู้ภัยลำน้ำน่าน</option>
+                            <option value="กู้ชีพโรงพยาบาล">กู้ชีพโรงพยาบาล</option>
+                            <option value="อื่นๆ">อื่นๆ</option>
+                        </select>
+                    </div>
+                </div>
             </div>
 
             <div class="row">

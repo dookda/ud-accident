@@ -55,7 +55,7 @@ export class ServiceService {
   }
 
   getPro(id: any) {
-    const url = `http://localhost:3000/selectb/pro/${id}`;
+    const url = `http://www.cgi.uru.ac.th:3000/selectb/pro/${id}`;
     return new Promise((resolve, reject) => {
       this.http.get(url).subscribe((res: any) => {
         resolve(res);
@@ -66,7 +66,7 @@ export class ServiceService {
   }
 
   getAmp(id: any) {
-    const url = `http://localhost:3000/selectb/amp/${id}`;
+    const url = `http://www.cgi.uru.ac.th:3000/selectb/amp/${id}`;
     return new Promise((resolve, reject) => {
       this.http.get(url).subscribe((res: any) => {
         resolve(res);
@@ -77,7 +77,7 @@ export class ServiceService {
   }
 
   getTam(id: any) {
-    const url = `http://localhost:3000/selectb/tam/${id}`;
+    const url = `http://www.cgi.uru.ac.th:3000/selectb/tam/${id}`;
     return new Promise((resolve, reject) => {
       this.http.get(url).subscribe((res: any) => {
         resolve(res);
@@ -88,7 +88,7 @@ export class ServiceService {
   }
 
   getAmpExt(id: any) {
-    const url = `http://localhost:3000/selectb/ampext/${id}`;
+    const url = `http://www.cgi.uru.ac.th:3000/selectb/ampext/${id}`;
     return new Promise((resolve, reject) => {
       this.http.get(url).subscribe((res: any) => {
         resolve(res);
@@ -99,7 +99,7 @@ export class ServiceService {
   }
 
   getTamExt(id: any) {
-    const url = `http://localhost:3000/selectb/tamext/${id}`;
+    const url = `http://www.cgi.uru.ac.th:3000/selectb/tamext/${id}`;
     return new Promise((resolve, reject) => {
       this.http.get(url).subscribe((res: any) => {
         resolve(res);

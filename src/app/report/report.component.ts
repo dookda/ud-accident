@@ -22,6 +22,7 @@ export class ReportComponent implements OnDestroy, OnInit {
   public formData: any;
 
   gid?: any;
+  titleName?: any;
   firstName?: any;
   lastName?: any;
   idCard?: any;
@@ -30,6 +31,8 @@ export class ReportComponent implements OnDestroy, OnInit {
   accDate?: any;
   accTime?: any;
   accPlace?: any;
+  tam?: any;
+  amp?: any;
   x?: any;
   y?: any;
   vehicle?: any;
@@ -39,7 +42,7 @@ export class ReportComponent implements OnDestroy, OnInit {
   toHospital?: any;
   deathInfo?: any;
   transferType?: any;
-  transferBy?: any;
+  disputant?: any;
   deathDate?: any;
   deathTime?: any;
   geom?: any;
@@ -108,6 +111,7 @@ export class ReportComponent implements OnDestroy, OnInit {
 
   showDetail(p: any) {
     this.gid = p.gid;
+    this.titleName = p.title_name;
     this.firstName = p.first_name;
     this.lastName = p.last_name;
     this.idCard = p.id_card;
@@ -116,6 +120,8 @@ export class ReportComponent implements OnDestroy, OnInit {
     this.accDate = p.acc_date;
     this.accTime = p.acc_time;
     this.accPlace = p.acc_place;
+    this.tam = p.tam;
+    this.amp = p.amp;
     this.x = p.x;
     this.y = p.y;
     this.vehicle = p.vehicle;
@@ -125,7 +131,7 @@ export class ReportComponent implements OnDestroy, OnInit {
     this.toHospital = p.to_hospital;
     this.deathInfo = p.death_info;
     this.transferType = p.transfer_type;
-    this.transferBy = p.transfer_by;
+    this.disputant = p.disputant;
     this.deathDate = p.death_date;
     this.deathTime = p.death_time;
     this.geom = p.geom;

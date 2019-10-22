@@ -27,7 +27,7 @@
             <tbody>
                 <tr *ngFor="let p of persons; let i = index">
                     <td>{{ i+1 }}</td>
-                    <td>{{ p.first_name }} {{ p.last_name }}</td>
+                    <td>{{ p.title_name }} {{ p.first_name }} {{ p.last_name }}</td>
                     <td>{{ p.vehicle }}</td>
                     <td>{{ p.behaviour }}</td>
                     <td>{{ p.accdate }}</td>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="alert alert-dismissible alert-info">
-                        <strong>ชื่อ-สกุล: </strong> {{ firstName }} {{lastName}}
+                        <strong>ชื่อ-สกุล: </strong>{{titleName}} {{ firstName }} {{lastName}}
                     </div>
                     <div class="alert alert-dismissible alert-info">
                         <strong>เลขบัตรประจำตัวประชาชน: </strong> {{ idCard }}
@@ -73,13 +73,17 @@
                         <strong>วัน เวลา เกิดเหตุ:</strong> {{ accDate }} {{ accTime }}
                     </div>
                     <div class="alert alert-dismissible alert-info">
-                        <strong>สถานที่เกิดเหตุ:</strong> {{ accPlace }}
+                        <strong>สถานที่เกิดเหตุ:</strong> {{ accPlace }} <strong>ตำบล:</strong> {{ tam }}
+                        <strong>อำเภอ:</strong> {{ amp }}
                     </div>
                     <div class="alert alert-dismissible alert-info">
                         <strong>พิกัดละติจูด ลองจิจูด:</strong> {{ x }} {{ y }}
                     </div>
                     <div class="alert alert-dismissible alert-info">
-                        <strong>ยานพาหนะ:</strong> {{ vehicle }}
+                        <strong>ยานพาหนะผู้บาดเจ็บ-เสียชีวิต:</strong> {{ vehicle }}
+                    </div>
+                    <div class="alert alert-dismissible alert-info">
+                        <strong>ยานพาหนะคู่กรณี:</strong> {{ disputant }}
                     </div>
                     <div class="alert alert-dismissible alert-info">
                         <strong>ประเภทผู้บาดเจ็บ:</strong> {{ injuryType }}
@@ -98,9 +102,6 @@
                     </div>
                     <div class="alert alert-dismissible alert-info">
                         <strong>หน่วยที่นำส่ง:</strong> {{ transferType }}
-                    </div>
-                    <div class="alert alert-dismissible alert-info">
-                        <strong>นำส่งโดย:</strong> {{ transferBy }}
                     </div>
                     <div class="alert alert-dismissible alert-info">
                         <strong>วัน เวลา เสียชีวิต:</strong>{{ deathDate }} {{ deathTime }}
