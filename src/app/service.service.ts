@@ -11,7 +11,7 @@ export class ServiceService {
   ) { }
 
   getData() {
-    const url = 'http://www.cgi.uru.ac.th:3000/accident/get/';
+    const url = 'https://www.rti2dss.com:3100/api/get/';
     return new Promise((resolve, reject) => {
       this.http.get(url).subscribe((res: any) => {
         resolve(res);
@@ -22,7 +22,7 @@ export class ServiceService {
   }
 
   insertData(obj: any) {
-    const url = 'http://www.cgi.uru.ac.th:3000/accident/insert/';
+    const url = 'https://www.rti2dss.com:3100/api/insert/';
     return new Promise((resolve, reject) => {
       this.http.post(url, obj).subscribe((res: any) => {
         resolve(res);
@@ -33,7 +33,7 @@ export class ServiceService {
   }
 
   updateData(obj: any) {
-    const url = 'http://www.cgi.uru.ac.th:3000/accident/update/';
+    const url = 'https://www.rti2dss.com:3100/api/update/';
     return new Promise((resolve, reject) => {
       this.http.post(url, obj).subscribe((res: any) => {
         resolve(res);
@@ -44,7 +44,7 @@ export class ServiceService {
   }
 
   deleteData(obj: any) {
-    const url = 'http://www.cgi.uru.ac.th:3000/accident/delete/';
+    const url = 'https://www.rti2dss.com:3100/api/delete/';
     return new Promise((resolve, reject) => {
       this.http.post(url, obj).subscribe((res: any) => {
         resolve(res);

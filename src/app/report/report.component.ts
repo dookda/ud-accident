@@ -57,7 +57,7 @@ export class ReportComponent implements OnDestroy, OnInit {
 
   ngOnInit() {
     this.spinner.show(undefined, {
-      type: 'square-jelly-box',
+      type: 'ball-spin-clockwise',
       size: 'medium',
       color: 'orange',
       fullScreen: false
